@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xxl-12">
+            <div class="card mb-3 my-5 ">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img [src]="product?.Img" class="card-img img-fluid" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h2 class="card-title">{{product?.Name}}</h2>
+                            <p class="card-text fs-3">Current Price :{{product?.Price|currency}}</p>
+                            <p class="card-text fs-3">Available Pcs :{{product?.Quantity}}</p>
+                            <ng-container [ngSwitch]="product?.Quantity">
+                                <ng-container *ngSwitchCase="0"><h3 class="text-danger">Out of Stock</h3></ng-container>
+                                <ng-container *ngSwitchCase="1"><h3 class="text-danger">Only 1 Pc Available</h3></ng-container>
+                                <ng-container *ngSwitchCase="2"><h3 class="text-warning">Only 2 Pcs Available</h3></ng-container>
+                                <ng-container *ngSwitchCase="3"><h3 class="text-warning">Only 3 Pcs Available</h3></ng-container>
+                                <ng-container *ngSwitchDefault><h3>Out of Stock</h3></ng-container>
+                            </ng-container>
+                            <p class="card-text fs-3">From :{{product?.Category?.Name}}</p>
+                            <p class="card-text fs-4" style="color: gray;">Discription : {{product?.Discription}}</p>
+                            <p class="card-text fs-3"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-dark" [routerLink]="'/home/'">Back</button>
+            <button class="btn btn-dark" (click)="prevProduct()" [disabled]="pID == pIDs[0]"><i class="fa-solid fa-caret-right fa-rotate-180" style="color: #ffffff;"></i></button>
+            <button class="btn btn-dark" (click)="nextProduct()" [disabled]="pID == pIDs[pIDs.length-1]"><i class="fa-solid fa-caret-right" style="color: #ffffff;"></i></button>
+        </div>
+    </div>
+</div>

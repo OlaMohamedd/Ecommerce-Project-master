@@ -1,0 +1,6 @@
+<select class="form-select my-3" [(ngModel)]="CategoryIDParent">
+    <option value="">All Categories</option>
+    <option *ngFor="let category of CategoryList" [ngValue]="category.ID">{{ category.Name }}</option>
+</select>
+
+<app-product [CategoryID]="CategoryIDParent"></app-product>

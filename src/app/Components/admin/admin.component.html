@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="login-form">
+        <div class="main-div">
+            <h2>DashBoard</h2>
+            <p>Please Enter New Product</p>
+            <form id="Login" class="row g-3 mt-5" (ngSubmit)="addOrUpdateProduct()" #productForm="ngForm">
+                <div class="form-group">
+                    <label for="id" class="form-label">ID</label>
+                    <input type="number" class="form-control" id="id" name="id" [(ngModel)]="product.id">
+                </div>
+                <div class="form-group">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" [(ngModel)]="product.Name"
+                        minlength="3" placeholder="Product Name" required #name="ngModel"
+                        [ngClass]="{'is-invalid':(name.touched||name.dirty)&& name.invalid}">
+                    <span class="invalid-feedback">
+                        <span *ngIf="name.errors?.['required']">Product must have name</span>
+                        <span *ngIf="name.errors?.['minlength']">Product name at least be 3 chars</span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="price" name="price" [(ngModel)]="product.Price"
+                        min="0" required #priceo="ngModel"
+                        [ngClass]="{'is-invalid':(priceo.touched||priceo.dirty)&& priceo.invalid}">
+                    <span class="invalid-feedback">
+                        <span *ngIf="priceo.errors?.['required']">Product must have Price</span>
+                        <span *ngIf="priceo.errors?.['min']">Product Price is not valid</span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="image" class="form-label">Image</label>
+                    <input type="text" class="form-control" id="image" name="image" [(ngModel)]="product.Img"
+                        minlength="15" placeholder="Image Link" required #img="ngModel"
+                        [ngClass]="{'is-invalid':(img.touched||img.dirty)&& img.invalid}">
+                    <span class="invalid-feedback">
+                        <span *ngIf="img.errors?.['required']">Product must have Image</span>
+                        <span *ngIf="img.errors?.['minlength']">Product Link is not valid</span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="catid" class="form-label">Category ID</label>
+                    <input type="text" class="form-control" id="catid" name="catid" [(ngModel)]="product.Category.ID"
+                        min="0" required #catID="ngModel"
+                        [ngClass]="{'is-invalid':(catID.touched||catID.dirty)&& catID.invalid}">
+                    <span class="invalid-feedback">
+                        <span *ngIf="catID.errors?.['required']">Product must have Category ID</span>
+                        <span *ngIf="catID.errors?.['min']">Category ID is not valid</span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="catname" class="form-label">Category Name</label>
+                    <input type="text" class="form-control" id="catname" name="catname"
+                        [(ngModel)]="product.Category.Name" minlength="3" placeholder="Category Name" required
+                        #catName="ngModel"
+                        [ngClass]="{'is-invalid':(catName.touched||catName.dirty)&& catName.invalid}">
+                    <span class="invalid-feedback">
+                        <span *ngIf="catName.errors?.['required']">Category must have name</span>
+                        <span *ngIf="catName.errors?.['minlength']">Category name at least be 3 chars</span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="discription" class="form-label">Discription</label>
+                    <textarea class="form-control" id="discription" name="discription" rows="6"
+                        [(ngModel)]="product.Discription" minlength="3" placeholder="Discription" required
+                        #dis="ngModel" [ngClass]="{'is-invalid':(dis.touched||dis.dirty)&& dis.invalid}">
+                </textarea>
+                    <span class="invalid-feedback">
+                        <span *ngIf="dis.errors?.['required']">Product must have Discription</span>
+                        <span *ngIf="dis.errors?.['minlength']">Discription at least have 3 chars</span>
+                    </span>
+                </div>
+
+                <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Add & Update
+                    Product</button>
+            </form>
+        </div>
+
+    </div>
+</div>

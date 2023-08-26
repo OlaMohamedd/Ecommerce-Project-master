@@ -1,0 +1,47 @@
+<div class="col-12">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg  " style="background-color: 	#7D1B7E;">
+            <nav class="navbar bg-body-tertiary">
+                <div class="container p-0 m-0 mt-0 pb-0">
+                    <a class="navbar-brand m-0 p-0" href="home">
+                        <img src="assets/imgs/hab.webp"  width="100" height="60">
+                    </a>
+                </div>
+            </nav>
+            <div class="container-fluid">
+                <!-- <a class="navbar-brand fw-bold" href="home">Crochet Loza</a> -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item fw-bold">
+                            <a class="nav-link" routerLink="home" routerLinkActive="test">Home</a>
+                        </li>
+                        <li class="nav-item fw-bold">
+                            <a class="nav-link" routerLink="categories">Categories</a>
+                        </li>
+                        <li class="nav-item fw-bold">
+                            <a class="nav-link" routerLink="admin">Admin</a>
+                        </li>
+                        <li class="nav-item fw-bold">
+                            <a class="nav-link" routerLink="register">Register</a>
+                        </li>
+                        <li class="nav-item fw-bold" *ngIf="!authService.isUserLoggedIn">
+                            <a class="nav-link" routerLink="login">Login</a>
+                        </li>
+                        <li class="nav-item fw-bold" *ngIf="authService.isUserLoggedIn">
+                            <a class="nav-link" routerLink="logout">logout</a>
+                        </li>
+                        <li class="nav-item fw-bold" *ngIf="authService.isUserLoggedIn">
+                            <a class="nav-link" routerLink="user/profile">Profile</a>
+                        </li>
+                    </ul>
+                    <span *ngIf="authService.currentUser  && authService.isUserLoggedIn " class="navbar-text">{{ "Welcome ! " + authService.currentUser.fullName}}</span>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

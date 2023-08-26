@@ -1,0 +1,64 @@
+
+<div class="row mt-5 d-flex justify-content-center">
+    <ng-container *ngIf="productService.ProductList; else noProducts">
+        <div class="card mx-1 my-1 col-3" *ngFor="let item of FilterCategory" appProductCard>
+            <img [src]="item.Img" class="card-img-top img-fluid" alt="..." (click)="goToProductDetails(item.id)">
+            <div class="card-body" [class.text-danger]="item.Price < 300">
+                <h5 class="card-title">{{ store.name }}</h5>
+                <p class="card-text">
+                    Product ID: {{ item.id }} <br>
+                    Product Name: {{ item.Name }} <br>
+                    Available pcs: {{ item.Quantity }} <br>
+                    Price: {{ item.Price | currency }} <br>
+                </p>
+                <div class="d-flex align-center justify-content-center">
+                    <!-- <p class="card-text">
+                        Category :<br>
+                        {{ item.Category.ID }} / {{ item.Category.Name }}
+                    </p> -->
+                    <img src="{{ store.logo }}" class="card-img-top img-fluid" alt="..."
+                        style="height: 90px;width: 80px;">
+                </div>
+
+                <ng-container [ngSwitch]="item.Quantity">
+                    <ng-container *ngSwitchCase="1">
+                        <p class="card-text">Last one item left!</p>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="2">
+                        <p class="card-text">Last two items left!</p>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="0">
+                        <p class="card-text">Out of stock!</p>
+                    </ng-container>
+                    <ng-container *ngSwitchDefault>
+                        <p class="card-text">In stock.</p>
+                    </ng-container>
+                </ng-container>
+
+                <h3 *ngIf="Discount !== 'No Discount'">We offer an explicit discount of: {{ Discount }}</h3>
+
+                <!-- <input name="myInput" id="myInput" min="0" [max]="item.Quantity" type="number" class="form-control w-25 mb-2" #test [(ngModel)]="+test.value"> -->
+
+                <div class="qty mt-2 mb-2">
+                    <span class="minus bg-dark">-</span>
+                    <input type="number" class="count" name="qty" value="1" #test [(ngModel)]="+test.value"  id="myInput" min="0" [max]="item.Quantity">
+                    <span class="plus bg-dark">+</span>
+                </div>
+
+
+
+                    <button type="button" class="btn btn-outline-success fw-bold me-1" (click)="togglePurchase(item,+test.value)"
+                    [disabled]="item.Quantity < 0">Buy</button>
+                    <button type="button" class="btn btn-outline-info fw-bold  me-1" *ngIf="authService.isUserLoggedIn"  (click)="productApiService.editProduct(item.id)">Edit</button>
+                    <button type="button" class="btn btn-outline-danger fw-bold" *ngIf="authService.isUserLoggedIn" (click)="deleteProduct(item.id)">Delete</button>
+               
+                <div *ngIf="isPurchasedItemId == item.id">
+                    <h3 >Thanks for purchasing from our Store,{{ ClientName }}!</h3>
+                    </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template #noProducts>
+        <p>No products found.</p>
+    </ng-template>
+</div>
